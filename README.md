@@ -1,2 +1,2 @@
-# medium-graphql-express
-Implementación de GraphQL con Express
+# medium-graphql
+Implementación de GraphQL con Express y React + Vite
