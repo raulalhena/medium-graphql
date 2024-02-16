@@ -1,18 +1,29 @@
 import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
-import { resolvers } from './graphql/resolvers/users';
+import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import express from 'express';
+import http from 'http';
+import cors from 'cors';
 import { typeDefs } from './graphql/schema';
+import { resolvers } from './graphql/resolvers/resolvers';
 
-const apolloServer = new ApolloServer({
+const app = express();
+const httpServer = http.createServer(app);
+
+const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  plugins: [ ApolloServerPluginDrainHttpServer({ httpServer }) ],
 });
 
-export const connect = async () => {
-  const { url } = await startStandaloneServer( apolloServer, {
-    listen: { port: 3000 }
-  });
-  if(url) console.log('Server listening on port 3000...');
-};
+await server.start();
 
-connect();
+app.use(
+  '/graphql',
+  cors<cors.CorsRequest>(),
+  express.json(),
+  expressMiddleware(server),
+);
+
+await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
+console.log(`Server listening on http://localhost:4000/graphql`);
