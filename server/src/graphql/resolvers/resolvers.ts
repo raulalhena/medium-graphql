@@ -28,6 +28,14 @@ export const resolvers = {
       const newUser = { ...args };
       const addedUser = (await AppDataSource).getRepository(User);
       return await addedUser.save(newUser);
+    },
+
+    addPost: async (root, args) => {
+      const newPost = { ...args };
+      newPost.publishedDate = String(Date.now());
+      console.log(newPost)
+      const addedPost = (await AppDataSource).getRepository(Post);
+      return await addedPost.save(newPost);
     }
   }
 };

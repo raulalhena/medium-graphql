@@ -27,5 +27,10 @@ export const typeDefs = `#graphql
       email: String!
       password: String!
     ): User
+
+    addPost (
+      title: String!
+      content: String!
+    ): Post
   }
 `;
