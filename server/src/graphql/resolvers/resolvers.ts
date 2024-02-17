@@ -33,7 +33,6 @@ export const resolvers = {
     addPost: async (root, args) => {
       const newPost = { ...args };
       newPost.publishedDate = String(Date.now());
-      console.log(newPost)
       const addedPost = (await AppDataSource).getRepository(Post);
       return await addedPost.save(newPost);
     }
