@@ -31,6 +31,7 @@ export const typeDefs = `#graphql
     addPost (
       title: String!
       content: String!
+      draft: Boolean!
     ): Post
   }
 `;

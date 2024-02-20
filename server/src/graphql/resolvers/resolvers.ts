@@ -1,6 +1,6 @@
-import { AppDataSource } from '../../db/data-source';
-import { User } from '../../users/entity/User';
-import { Post } from '../../posts/entity/Posts';
+import { AppDataSource } from '../../db/data-source.js';
+import { User } from '../../users/entity/User.js';
+import { Post } from '../../posts/entity/Posts.js';
 
 export const resolvers = {
   Query: {
@@ -32,7 +32,7 @@ export const resolvers = {
 
     addPost: async (root, args) => {
       const newPost = { ...args };
-      newPost.publishedDate = String(Date.now());
+      newPost.publishedDate = new Date().toISOString();
       const addedPost = (await AppDataSource).getRepository(Post);
       return await addedPost.save(newPost);
     }
