@@ -19,6 +19,9 @@ export class Post {
     @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP' })
       date: Date;
 
+    @Column('integer')
+      userId: number;
+
     @ManyToOne(() => User, (user) => user.posts)
       user: Relation<User>;
 }

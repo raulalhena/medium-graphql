@@ -21,6 +21,12 @@ export const resolvers = {
       const Posts = (await AppDataSource).getRepository(Post);
       return await Posts.find();
     },
+
+    findUserPosts: async(root, args) => {
+      const { userId } = args;
+      const Posts = (await AppDataSource).getRepository(Post);
+      return await Posts.findBy({ userId: userId });
+    }
   },
 
   Mutation: {

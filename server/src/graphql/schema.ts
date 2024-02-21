@@ -13,12 +13,14 @@ export const typeDefs = `#graphql
     content: String!
     draft: Boolean!
     publishedDate: String!
+    userId: ID!
   }
 
   type Query {
     users: [User]!
     posts: [Post]!
     findUser(option: String!, value: String!): User
+    findUserPosts(userId: ID!): [Post]
   }
 
   type Mutation {
@@ -32,6 +34,7 @@ export const typeDefs = `#graphql
       title: String!
       content: String!
       draft: Boolean!
+      userId: ID!
     ): Post
   }
 `;
