@@ -16,7 +16,6 @@ a {
 }
 
 .main {
-  /* border: 1px solid blue; */
   margin: 10px;
 }
 
@@ -33,7 +32,6 @@ a {
 }
 
 .posts-list {
-  /* border: 1px solid red; */
   height: 70vh;
   width: 80%;
   margin-top: 10px;
